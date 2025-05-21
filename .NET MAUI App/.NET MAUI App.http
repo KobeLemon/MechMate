@@ -1,0 +1,11 @@
+@_NET_MAUI_App_HostAddress = http://localhost:5006
+
+GET {{_NET_MAUI_App_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{_NET_MAUI_App_HostAddress}}/todos/1
+Accept: application/json
+
+###
