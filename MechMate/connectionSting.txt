@@ -1,0 +1,1 @@
+    "ConnectionString": "mongodb+srv://user1:<mechmate>@mechmate.sxdkq8x.mongodb.net/?retryWrites=true&w=majority&appName=MechMate",
