@@ -1,5 +1,5 @@
+using System.Text.Json.Serialization;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Mechmate.Models
