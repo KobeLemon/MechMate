@@ -7,12 +7,12 @@ namespace MechMate
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+            BindingContext = new MainPageViewModel(this.Navigation);
         }
 
-        private async void GoToMyRidePage(object? sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MyRidePage());
-        }
+        //private async void GoToMyRidePage(object? sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new MyRidePage("123"));
+        //}
     }
 }

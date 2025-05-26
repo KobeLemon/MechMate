@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MechMate.MainPage"
-             Title="My Garage">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MechMate.MainPage"
+            xmlns:pages="clr-namespace:MechMate"
+            Title="My Garage">
 
     <ScrollView>
         <VerticalStackLayout
@@ -26,11 +27,7 @@
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                  />
 
-            <Button
-                Text="Go to My Ride (testing)" 
-                SemanticProperties.Hint="Navigates to the My Ride page"
-                Clicked="GoToMyRidePage"
-                HorizontalOptions="Fill" />
+            <Button Grid.Column="1" Text="Go to My Ride (testing)" SemanticProperties.Hint="Navigates to the My Ride page" HorizontalOptions="Center" Padding="5" Command="{Binding Source={RelativeSource AncestorType={x:Type pages:MainPage}}, Path=BindingContext.GoToMyRidePageCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 

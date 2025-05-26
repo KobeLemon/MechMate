@@ -1,20 +1,17 @@
-using Mechmate.Models;
 using MechMate.ViewModels;
 
 namespace MechMate;
 
 public partial class MyRidePage : ContentPage
 {
-    public MyRidePage()
+    public MyRidePage(string vehicleID)
     {
         InitializeComponent();
-        BindingContext = new MyRidePageViewModel();
+        BindingContext = new MyRidePageViewModel(vehicleID, this.Navigation);
     }
 
-    Vehicle vehicle = new();
-
-    private async void GoToMyRepairsPage(object? sender, EventArgs e)
+    private void GoToMyRepairsPage(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MyRepairsPage(vehicle.Id));
+
     }
 }
