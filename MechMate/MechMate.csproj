@@ -66,4 +66,13 @@
 		<PackageReference Include="MongoDB.Bson" Version="3.4.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="MyRepairsPage.xaml.cs">
+	    <DependentUpon>MyRepairsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="MyRidePage.xaml.cs">
+	    <DependentUpon>MyRidePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

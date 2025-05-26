@@ -18,10 +18,10 @@ namespace MechMate
             builder.Services
                 .AddSingleton<MainPage>()
                 .AddSingleton<MainPageViewModel>()
-                .AddSingleton<MyRidePage>()
-                .AddSingleton<MyRidePageViewModel>()
-                .AddSingleton<RepairsPage>()
-                .AddSingleton<RepairsPageViewModel>();
+                .AddTransient<MyRidePage>()
+                .AddTransient<MyRidePageViewModel>()
+                .AddTransient<MyRepairsPage>()
+                .AddTransient<MyRepairsPageViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
