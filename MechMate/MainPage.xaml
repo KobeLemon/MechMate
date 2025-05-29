@@ -28,6 +28,8 @@
                  />
 
             <Button Grid.Column="1" Text="Go to My Ride (testing)" SemanticProperties.Hint="Navigates to the My Ride page" HorizontalOptions="Center" Padding="5" Command="{Binding Source={RelativeSource AncestorType={x:Type pages:MainPage}}, Path=BindingContext.GoToMyRidePageCommand}"/>
+
+            <Button Grid.Column="1" Text="TestMongoDBConnection" SemanticProperties.Hint="Test Mongo D B Connection" HorizontalOptions="Center" Padding="5" Clicked="TestMongoDBConnection"/>
         </VerticalStackLayout>
     </ScrollView>
 

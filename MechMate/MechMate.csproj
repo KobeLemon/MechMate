@@ -68,10 +68,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="config.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="config.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="DotNetEnv" Version="3.1.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 		<PackageReference Include="MongoDB.Bson" Version="3.4.0" />
+		<PackageReference Include="MongoDB.Driver" Version="3.4.0" />
 		<PackageReference Include="MongoDB.Driver" Version="3.4.0" />
 	</ItemGroup>
 
