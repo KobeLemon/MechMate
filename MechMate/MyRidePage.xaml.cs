@@ -9,9 +9,4 @@ public partial class MyRidePage : ContentPage
         InitializeComponent();
         BindingContext = new MyRidePageViewModel(vehicleID, this.Navigation);
     }
-
-    private void GoToMyRepairsPage(object sender, EventArgs e)
-    {
-
-    }
 }

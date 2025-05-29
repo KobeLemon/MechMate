@@ -1,7 +1,10 @@
+using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MechMate.Models;
+using MongoDB.Bson.IO;
 using System.Collections.ObjectModel;
+using System.Text;
 
 namespace MechMate.ViewModels;
 
@@ -15,6 +18,9 @@ public partial class MyRidePageViewModel : ObservableObject
 
     [ObservableProperty]
     private ImageSource imageSource;
+
+    [ObservableProperty]
+    string saveJsonFileResult = string.Empty;
 
     private readonly INavigation _navigation;
     public MyRidePageViewModel(string vehicleId, INavigation navigation)
@@ -73,5 +79,18 @@ public partial class MyRidePageViewModel : ObservableObject
     private async Task GoToMyRepairsPage()
     {
         await _navigation.PushAsync(new MyRepairsPage(vehicle.Id, vehicle.DisplayName));
+    }
+
+    [RelayCommand]
+    private async Task SaveJsonFile()
+    {
+        string exportedVehicle = vehicle.DisplayName;
+        foreach (DisplayItem item in displayVehicle)
+        {
+            exportedVehicle += $"\n{item.Key}: {item.Value}";
+        }
+        using var stream = new MemoryStream(Encoding.Default.GetBytes(exportedVehicle));
+        var path = await fileSaver.SaveAsync("vehicleInfo.txt", stream, cancellationTokenSource.Token);
+        saveJsonFileResult = path.ToString();
     }
 }
