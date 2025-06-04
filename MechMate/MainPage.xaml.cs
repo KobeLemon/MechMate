@@ -1,18 +1,37 @@
-﻿using MechMate.ViewModels;
+﻿using MechMate.Models;
+using MechMate.Services;
+using MechMate.ViewModels;
 
-namespace MechMate
+namespace MechMate;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
-            InitializeComponent();
-            BindingContext = new MainPageViewModel(this.Navigation);
-        }
+    private readonly MongoDBConnectionTest _connectionTest;
 
-        //private async void GoToMyRidePage(object? sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new MyRidePage("123"));
-        //}
+    public MainPage(MongoDBService mongoDBService)
+    {
+        InitializeComponent();
+        _connectionTest = new MongoDBConnectionTest(mongoDBService);
+        BindingContext = new MainPageViewModel(this.Navigation);
+    }
+
+    public async void TestMongoDBConnection()
+    {
+        try
+        {
+            bool isConnected = await _connectionTest.TestConnection();
+            if (isConnected)
+            {
+                await DisplayAlert("Success", "Successfully connected to MongoDB Atlas!", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Error", "Failed to connect to MongoDB Atlas. Please check your connection string and network settings.", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+        }
     }
 }

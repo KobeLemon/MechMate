@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MechMate.Models
 {
-    class RepairInstance
+    public class RepairInstance
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
