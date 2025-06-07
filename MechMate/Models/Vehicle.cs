@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.IO;
+using Microsoft.Maui.Controls;
 
 namespace MechMate.Models
 {
@@ -27,6 +29,25 @@ namespace MechMate.Models
         [BsonIgnore]
         public string DisplayName => $"{Year} {Make} {Model}";
 
-        
+        // Add this property for XAML binding
+        [JsonIgnore]
+        [BsonIgnore]
+        public ImageSource? ImageUrl
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ImageBase64))
+                    return null;
+                try
+                {
+                    byte[] imageBytes = Convert.FromBase64String(ImageBase64);
+                    return ImageSource.FromStream(() => new MemoryStream(imageBytes));
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
