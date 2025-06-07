@@ -1,4 +1,4 @@
-﻿using MechMate.Models;
+using MechMate.Models;
 using MechMate.ViewModels;
 
 namespace MechMate
@@ -17,7 +17,6 @@ namespace MechMate
             if (selectedVehicle == null)
                 return;
             await Navigation.PushAsync(new MyRidePage(selectedVehicle));
-            //await Shell.Current.GoToAsync($"{nameof(MyRidePage)}?vehicleId={selectedVehicle.Id}");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MechMate.Models
 {
-    class RepairPart
+    public class RepairPart
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,4 +1,6 @@
-﻿using MechMate.ViewModels;
+﻿using CommunityToolkit.Maui;
+using MechMate.ViewModels;
+using MechMate.Services;
 using Microsoft.Extensions.Logging;
 
 namespace MechMate
@@ -7,6 +9,13 @@ namespace MechMate
     {
         public static MauiApp CreateMauiApp()
         {
+            DotNetEnv.Env.Load();
+            var MONGODB_CONNECTION_STRING = Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING");
+            if (string.IsNullOrEmpty(MONGODB_CONNECTION_STRING))
+            {
+                throw new InvalidOperationException("Connection string is not set. Please ensure the MONGODB_CONNECTION_STRING environment variable is defined.");
+            }
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -14,14 +23,20 @@ namespace MechMate
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseMauiCommunityToolkit();
             builder.Services
                 .AddTransient<MainPage>()
                 .AddTransient<MainPageViewModel>()
                 .AddTransient<MyRidePage>()
                 .AddTransient<MyRidePageViewModel>()
                 .AddTransient<MyRepairsPage>()
-                .AddTransient<MyRepairsPageViewModel>();
+                .AddTransient<MyRepairsPageViewModel>()
+                .AddSingleton<MongoDBService>(service =>
+                new MongoDBService(
+                    MONGODB_CONNECTION_STRING,
+                    "MechMateDB"
+                ));
 
 #if DEBUG
             builder.Logging.AddDebug();
