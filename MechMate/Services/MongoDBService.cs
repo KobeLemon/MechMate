@@ -30,7 +30,7 @@ namespace MechMate.Services
 
         public IEnumerable<Tuple<int, string>> GetAllShortInfoForGarage(string collectionName)
         {
-            // Add a method to get all vehicles year/make/model & image for "My Garage" page
+            // Add a method to get all vehicles year/make/model/vin & image for "My Garage" page
             throw new NotImplementedException();
         }
 

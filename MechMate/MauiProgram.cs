@@ -9,13 +9,6 @@ namespace MechMate
     {
         public static MauiApp CreateMauiApp()
         {
-            DotNetEnv.Env.Load();
-            var MONGODB_CONNECTION_STRING = Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING");
-            if (string.IsNullOrEmpty(MONGODB_CONNECTION_STRING))
-            {
-                throw new InvalidOperationException("Connection string is not set. Please ensure the MONGODB_CONNECTION_STRING environment variable is defined.");
-            }
-
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -25,6 +18,12 @@ namespace MechMate
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 })
                 .UseMauiCommunityToolkit();
+            // 
+            string MONGODB_CONNECTION_STRING = "mongodb+srv://user1:mechmate@mechmate.sxdkq8x.mongodb.net/?retryWrites=true&w=majority&appName=MechMate";
+            if (string.IsNullOrEmpty(MONGODB_CONNECTION_STRING))
+            {
+                throw new InvalidOperationException("Connection string is not set. Please ensure the MONGODB_CONNECTION_STRING environment variable is defined.");
+            }
             builder.Services
                 .AddTransient<MainPage>()
                 .AddTransient<MainPageViewModel>()
