@@ -5,12 +5,16 @@ namespace MechMate.ViewModels;
 public partial class MyRepairsPageViewModel : ObservableObject
 {
     [ObservableProperty]
-    public string vehicleId = string.Empty;
+    public string _vehicleId = string.Empty;
     [ObservableProperty]
-    public string vehicleName = string.Empty;
-    public MyRepairsPageViewModel(string _vehicleId, string _vehicleName)
+    public string _vehicleName = string.Empty;
+    [ObservableProperty]
+    public string _vehicleVIN = string.Empty;
+
+    public MyRepairsPageViewModel(string vehicleId, string vehicleName, string vehicleVIN)
     {
-        vehicleId = _vehicleId;
-        vehicleName = _vehicleName;
+        _vehicleId = vehicleId;
+        _vehicleName = vehicleName;
+        _vehicleVIN = vehicleVIN;
     }
 }

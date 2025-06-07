@@ -16,8 +16,8 @@ namespace MechMate
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             builder.Services
-                .AddSingleton<MainPage>()
-                .AddSingleton<MainPageViewModel>()
+                .AddTransient<MainPage>()
+                .AddTransient<MainPageViewModel>()
                 .AddTransient<MyRidePage>()
                 .AddTransient<MyRidePageViewModel>()
                 .AddTransient<MyRepairsPage>()
