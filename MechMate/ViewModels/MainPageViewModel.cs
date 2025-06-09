@@ -1,19 +1,23 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using MechMate.Interfaces;
 using MechMate.Models;
-using Microsoft.Maui.Controls;
+using MechMate.Services;
 
 namespace MechMate.ViewModels;
 
 public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ObservableCollection<Vehicle> vehicleList = new();
+    private List<Vehicle> vehicleList = new();
     [ObservableProperty]
     private Vehicle selectedVehicle;
-    public MainPageViewModel()
+
+    private readonly IMongoDBService _mongoDbService;
+    public MainPageViewModel(MongoDBService mongoDbService)
     {
+        _mongoDbService = mongoDbService;
+        //GetAllShortVehicleInfo();
         vehicleList = new()
         {
             new Vehicle
@@ -49,5 +53,10 @@ public partial class MainPageViewModel : ObservableObject
                 ImageBase64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII="
             },
         };
+    }
+
+    private async void GetAllShortVehicleInfo()
+    {
+        VehicleList = await _mongoDbService.GetAllShortInfoForGarage();
     }
 }

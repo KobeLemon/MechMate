@@ -7,42 +7,46 @@
             xmlns:viewmodels="clr-namespace:MechMate.ViewModels"
             x:DataType="viewmodels:MainPageViewModel"
             Title="My Garage">
-    <CollectionView 
-            ItemsSource="{Binding VehicleList}"
-            SelectionChanged="OnVehicleSelectedAsync"
-            SelectionMode="Single">
-        <CollectionView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical" Span="2"/>
-        </CollectionView.ItemsLayout>
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:Vehicle">
-                <Border 
-                    Stroke="#DDD"
-                    StrokeShape="RoundRectangle 15"
-                    StrokeThickness="1"
-                    Padding="20"
-                    Margin="10"
-                    Background="White">
-                    <StackLayout Spacing="8" HorizontalOptions="Center">
-                        <Image Source="{Binding ImageUrl}"
-                            HeightRequest="100"
-                            WidthRequest="160"
-                            Aspect="AspectFill"
-                            HorizontalOptions="Center"/>
+    <StackLayout>
+        <Button Margin="10" Text="Add New Vehicle" Clicked="AddNewVehicle"/>
+        <BoxView Margin="10" Color="Black" HeightRequest="1"/>
+        <CollectionView 
+        ItemsSource="{Binding VehicleList}"
+        SelectionChanged="OnVehicleSelectedAsync"
+        SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Vehicle">
+                    <Border 
+                Stroke="#DDD"
+                StrokeShape="RoundRectangle 15"
+                StrokeThickness="1"
+                Padding="20"
+                Margin="10"
+                Background="White">
+                        <StackLayout Spacing="8" HorizontalOptions="Center">
+                            <Image Source="{Binding ImageUrl}"
+                        HeightRequest="100"
+                        WidthRequest="160"
+                        Aspect="AspectFill"
+                        HorizontalOptions="Center"/>
 
-                        <Label Text="{Binding DisplayName}"
-                            FontAttributes="Bold"
-                            FontSize="20"
-                            TextColor="#222"
-                            HorizontalOptions="Center"/>
+                            <Label Text="{Binding DisplayName}"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        TextColor="#222"
+                        HorizontalOptions="Center"/>
 
-                        <Label Text="{Binding VIN}"
-                            FontSize="14"
-                            TextColor="#555"
-                            HorizontalOptions="Center"/>
-                    </StackLayout>
-                </Border>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                            <Label Text="{Binding VIN}"
+                        FontSize="14"
+                        TextColor="#555"
+                        HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 </ContentPage>

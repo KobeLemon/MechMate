@@ -5,10 +5,10 @@ namespace MechMate
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainPage(MainPageViewModel mainPageViewModel)
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+            BindingContext = mainPageViewModel;
         }
 
         private async void OnVehicleSelectedAsync(object sender, SelectionChangedEventArgs e)
@@ -17,6 +17,11 @@ namespace MechMate
             if (selectedVehicle == null)
                 return;
             await Navigation.PushAsync(new MyRidePage(selectedVehicle));
+        }
+
+        private async void AddNewVehicle(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddEditVehiclePage(new Vehicle()));
         }
     }
 }

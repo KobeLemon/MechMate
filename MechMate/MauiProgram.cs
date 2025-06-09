@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
-using MechMate.ViewModels;
+using MechMate.Models;
 using MechMate.Services;
+using MechMate.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace MechMate
@@ -16,26 +17,29 @@ namespace MechMate
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("MauiMaterialAssets.ttf", "MaterialAssets");
                 })
                 .UseMauiCommunityToolkit();
             // 
-            string MONGODB_CONNECTION_STRING = "mongodb+srv://user1:mechmate@mechmate.sxdkq8x.mongodb.net/?retryWrites=true&w=majority&appName=MechMate";
+            string MONGODB_CONNECTION_STRING = "mongodb://user1:mechmate@mechmate.sxdkq8x.mongodb.net/?retryWrites=true&w=majority&appName=MechMate";
             if (string.IsNullOrEmpty(MONGODB_CONNECTION_STRING))
             {
                 throw new InvalidOperationException("Connection string is not set. Please ensure the MONGODB_CONNECTION_STRING environment variable is defined.");
             }
             builder.Services
+                .AddSingleton(service =>
+                new MongoDBService(
+                    MONGODB_CONNECTION_STRING,
+                    "MechMateDB"
+                ))
                 .AddTransient<MainPage>()
                 .AddTransient<MainPageViewModel>()
                 .AddTransient<MyRidePage>()
                 .AddTransient<MyRidePageViewModel>()
                 .AddTransient<MyRepairsPage>()
                 .AddTransient<MyRepairsPageViewModel>()
-                .AddSingleton<MongoDBService>(service =>
-                new MongoDBService(
-                    MONGODB_CONNECTION_STRING,
-                    "MechMateDB"
-                ));
+                .AddTransient<AddEditVehiclePage>()
+                .AddTransient<AddEditVehiclePageViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

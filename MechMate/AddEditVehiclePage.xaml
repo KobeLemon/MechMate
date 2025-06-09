@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MechMate.AddEditVehiclePage"
+             xmlns:models="clr-namespace:MechMate.Models"
+             xmlns:pages="clr-namespace:MechMate"
+             xmlns:viewmodels="clr-namespace:MechMate.ViewModels"
+             x:DataType="viewmodels:AddEditVehiclePageViewModel"
+             Title="{Binding Title}">
+    <VerticalStackLayout>
+        <Grid Padding="10"
+              RowDefinitions="Auto, Auto"
+              ColumnDefinitions="0.5*,0.75*">
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   FontSize="18"
+                   Text="Image"
+                   HorizontalOptions="Start"
+                   VerticalOptions="End"
+                   Padding="0,10"/>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Text="&#xE710;"
+                   FontFamily="MaterialAssets"
+                   HorizontalTextAlignment="End"
+                   VerticalOptions="End"
+                   Margin="10,15"/>
+            <Image Grid.Row="0"
+                   Grid.Column="1"
+                   Source="{Binding VehicleImage}"
+                   BackgroundColor="WhiteSmoke"
+                   HeightRequest="100"
+                   />
+            <Button Grid.Row="0"
+                   Grid.Column="1"
+                    Opacity="0"
+                    HeightRequest="100"
+                   Command="{Binding SelectFileCommand}"/>
+            <BoxView Grid.Row="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Color="Black"
+                     HeightRequest="1"/>
+        </Grid>
+
+        <CollectionView ItemsSource="{Binding Vehicle.DisplayVehicle}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:DisplayItem">
+                    <Grid Padding="10"
+                          RowDefinitions="Auto, Auto"
+                          ColumnDefinitions="0.5*,0.75*">
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               FontSize="18"
+                               Text="{Binding Key}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"/>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="&#xE710;"
+                               FontFamily="MaterialAssets"
+                               HorizontalTextAlignment="End"
+                               VerticalOptions="Center"
+                               Margin="10"/>
+                        <Entry Grid.Row="0"
+                               Grid.Column="1"
+                               FontSize="18"
+                               BackgroundColor="WhiteSmoke"
+                               Text="{Binding Value}"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="End"/>
+                        <BoxView Grid.Row="1"
+                                 Grid.Column="0"
+                                 Grid.ColumnSpan="2"
+                                 Color="Black"
+                                 HeightRequest="1"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

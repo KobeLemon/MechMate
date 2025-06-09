@@ -8,16 +8,17 @@
             x:DataType="viewmodels:MyRidePageViewModel"
             Title="My Ride">
     <VerticalStackLayout>
-        <Grid Padding="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="0.75*,0.5*" RowSpacing="10">
-            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding Vehicle.DisplayName}" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center" />
-            <Button Grid.Column="0" Grid.Row="1" Text="Export to PDF" SemanticProperties.Hint="Exports vehicle data to PDF" HorizontalOptions="Center" Padding="5" Command="{Binding ExportVehicleToPdfCommand}" />
+        <Grid Padding="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="0.5*,0.5*,0.25*" RowSpacing="10">
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Vehicle.DisplayName}" FontSize="24" VerticalOptions="Center" HorizontalOptions="End" />
+            <Button Grid.Column="0" Grid.Row="1" Text="Export to PDF" SemanticProperties.Hint="Exports vehicle data to PDF" HorizontalOptions="Center" Padding="5"  />
             <Button Grid.Column="1" Grid.Row="1" Text="Go to My Repairs" SemanticProperties.Hint="Navigates to the My Repair page" HorizontalOptions="Center" Padding="5" Clicked="GoToMyRepairsPage"/>
-            <BoxView Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Color="Black" HeightRequest="1"/>
+            <Button Grid.Column="2" Grid.Row="1" Text="&#xE710;" FontFamily="MaterialAssets" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center" Clicked="EditVehicle"/>
+            <BoxView Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Color="Black" HeightRequest="1"/>
         </Grid>
 
-        <Image Source="{Binding Vehicle.ImageUrl}" HeightRequest="200" Margin="10"/>
+        <Image Source="{Binding Vehicle.ImageUrl}" HeightRequest="150" Margin="10"/>
 
-        <CollectionView ItemsSource="{Binding DisplayVehicle}">
+        <CollectionView ItemsSource="{Binding Vehicle.DisplayVehicle}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:DisplayItem">
                     <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="0.5*, 0.75*">
