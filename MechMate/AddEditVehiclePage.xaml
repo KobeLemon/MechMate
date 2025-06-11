@@ -7,6 +7,11 @@
              xmlns:viewmodels="clr-namespace:MechMate.ViewModels"
              x:DataType="viewmodels:AddEditVehiclePageViewModel"
              Title="{Binding Title}">
+    <VerticalStackLayout Padding="20" Spacing="10">
+       <Entry Placeholder="Enter VIN" Text="{Binding VinInput}" />
+       <Button Text="Lookup VIN" Command="{Binding LookupVinAsyncCommand}" />
+       <Label Text="{Binding LookupResult}" LineBreakMode="WordWrap" />
+    </VerticalStackLayout>
     <VerticalStackLayout>
         <Grid Padding="10"
               RowDefinitions="Auto, Auto"

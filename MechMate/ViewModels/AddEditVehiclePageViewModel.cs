@@ -6,6 +6,32 @@ namespace MechMate.ViewModels;
 
 public partial class AddEditVehiclePageViewModel : ObservableObject
 {
+     private readonly VinLookupService _vinLookupService;
+
+    [ObservableProperty]
+    private string vinInput = string.Empty;
+
+    [ObservableProperty]
+    private string lookupResult = string.Empty;
+
+    public VinLookupViewModel(VinLookupService vinLookupService)
+    {
+        _vinLookupService = vinLookupService;
+    }
+
+    [RelayCommand]
+    public async Task LookupVinAsync()
+    {
+        if (string.IsNullOrWhiteSpace(VinInput))
+        {
+            LookupResult = "Please enter a VIN.";
+            return;
+        }
+
+        var result = await _vinLookupService.LookupVinAsync(VinInput);
+        LookupResult = result ?? "Lookup failed.";
+    }
+
     [ObservableProperty]
     public Vehicle _vehicle = new();
     [ObservableProperty]
