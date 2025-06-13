@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MechMate.Models;
+using MechMate.Services;
 
 namespace MechMate.ViewModels;
 
@@ -14,10 +15,10 @@ public partial class AddEditVehiclePageViewModel : ObservableObject
     [ObservableProperty]
     private string lookupResult = string.Empty;
 
-    public VinLookupViewModel(VinLookupService vinLookupService)
-    {
-        _vinLookupService = vinLookupService;
-    }
+    //public VinLookupViewModel(VinLookupService vinLookupService)
+    //{
+    //    _vinLookupService = vinLookupService;
+    //}
 
     [RelayCommand]
     public async Task LookupVinAsync()
@@ -29,7 +30,7 @@ public partial class AddEditVehiclePageViewModel : ObservableObject
         }
 
         var result = await _vinLookupService.LookupVinAsync(VinInput);
-        LookupResult = result ?? "Lookup failed.";
+        LookupResult = result?.Message ?? "Lookup failed.";
     }
 
     [ObservableProperty]

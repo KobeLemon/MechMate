@@ -30,17 +30,19 @@
                    HorizontalTextAlignment="End"
                    VerticalOptions="End"
                    Margin="10,15"/>
-            <Image Grid.Row="0"
+            <Button Grid.Row="0"
+                   Grid.Column="1"
+                    Opacity="0"
+					BackgroundColor="WhiteSmoke"
+                    HeightRequest="100"
+                   Command="{Binding SelectFileCommand}"/>
+			<Image Grid.Row="0"
                    Grid.Column="1"
                    Source="{Binding VehicleImage}"
                    BackgroundColor="WhiteSmoke"
                    HeightRequest="100"
                    />
-            <Button Grid.Row="0"
-                   Grid.Column="1"
-                    Opacity="0"
-                    HeightRequest="100"
-                   Command="{Binding SelectFileCommand}"/>
+			<Label Grid.Row="2" Text="Edit/Upload"/>
             <BoxView Grid.Row="1"
                      Grid.Column="0"
                      Grid.ColumnSpan="2"
