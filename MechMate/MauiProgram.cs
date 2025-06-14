@@ -26,13 +26,11 @@ namespace MechMate
             {
                 throw new InvalidOperationException("Connection string is not set. Please ensure the MONGODB_CONNECTION_STRING environment variable is defined.");
             }
+
             builder.Services
-                .AddSingleton(Services.VinLookupService>();
-                .AddTransient<ViewModels.VinLookupViewModel>();
-                new MongoDBService(
-                    MONGODB_CONNECTION_STRING,
-                    "MechMateDB"
-                ))
+                .AddSingleton(new MongoDbService(MONGODB_CONNECTION_STRING, "MechMateDB"))
+                .AddSingleton<VinLookupService>()
+                .AddTransient<VinLookupViewModel>()
                 .AddTransient<MainPage>()
                 .AddTransient<MainPageViewModel>()
                 .AddTransient<MyRidePage>()

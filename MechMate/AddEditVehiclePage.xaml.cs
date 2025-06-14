@@ -8,7 +8,16 @@ namespace MechMate
         public AddEditVehiclePage(Vehicle vehicle)
         {
             InitializeComponent();
-            BindingContext = new AddEditVehiclePageViewModel(vehicle);
+            var vinLookupService = new VinLookupService();
+            BindingContext = new AddEditVehiclePageViewModel(vehicle, vinLookupService);
         }
+        // Constructor for adding a new vehicle
+        public AddEditVehiclePage()
+        {
+            InitializeComponent();
+            var vinLookupService = new VinLookupService();
+            BindingContext = new AddEditVehiclePageViewModel(vinLookupService);
+        }
+
     }
 }

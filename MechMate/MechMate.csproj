@@ -61,9 +61,6 @@
 
 	<ItemGroup>
 	  <Compile Remove="config.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Include="config.cs" />
 	</ItemGroup>
 
