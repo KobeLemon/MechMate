@@ -2,9 +2,10 @@ using MechMate.Models;
 using MechMate.ViewModels;
 
 namespace MechMate
-{
-    public partial class MainPage : ContentPage
+
+    public MainPage(MongoDBService mongoDBService)
     {
+
         public MainPage()
         {
             InitializeComponent();

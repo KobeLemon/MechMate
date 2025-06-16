@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui;
 using MechMate.ViewModels;
 using MechMate.Services;
 using Microsoft.Extensions.Logging;
@@ -35,6 +35,13 @@ namespace MechMate
                 .AddSingleton<MongoDBService>(service =>
                 new MongoDBService(
                     MONGODB_CONNECTION_STRING,
+                    "MechMateDB"
+                ));
+
+            // Add MongoDB service
+            builder.Services.AddSingleton<MongoDBService>(sp => 
+                new MongoDBService(
+                    "mongodb+srv://user1:<mechmate>@mechmate.sxdkq8x.mongodb.net/?retryWrites=true&w=majority&appName=MechMate",
                     "MechMateDB"
                 ));
 
