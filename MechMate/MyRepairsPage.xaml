@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MechMate.MyRepairsPage"
+            xmlns:local="clr-namespace:MechMate.Models"
+            xmlns:viewmodel="clr-namespace:MechMate.ViewModels"
+            x:DataType="viewmodel:MyRepairsPageViewModel"
+            Title="My Repairs">
+    <VerticalStackLayout>
+        <Label Text="{Binding VehicleName}"
+            FontAttributes="Bold"
+            FontSize="20"
+            TextColor="#222"
+            HorizontalOptions="Center"/>
+
+        <Label Text="{Binding VehicleVIN}"
+            FontSize="14"
+            TextColor="#555"
+            HorizontalOptions="Center"/>
+        <BoxView Grid.Row="1" Grid.ColumnSpan="2" Color="Black" HeightRequest="1"/>
+    </VerticalStackLayout>
+</ContentPage>

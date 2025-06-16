@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MechMate.MyRidePage"
+            xmlns:models="clr-namespace:MechMate.Models"
+            xmlns:pages="clr-namespace:MechMate"
+            xmlns:viewmodels="clr-namespace:MechMate.ViewModels"
+            x:DataType="viewmodels:MyRidePageViewModel"
+            Title="My Ride">
+    <VerticalStackLayout>
+        <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="0.75*,0.5*" RowSpacing="10">
+            <Label Grid.Column="0" Text="{Binding Vehicle.DisplayName}" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Button Grid.Column="1" Text="Go to My Repairs" SemanticProperties.Hint="Navigates to the My Repair page" HorizontalOptions="Center" Padding="5" Clicked="GoToMyRepairsPage"/>
+            <BoxView Grid.Row="1" Grid.ColumnSpan="2" Color="Black" HeightRequest="1"/>
+        </Grid>
+
+        <Image Source="{Binding Vehicle.ImageUrl}" HeightRequest="200" Margin="10"/>
+
+        <CollectionView ItemsSource="{Binding DisplayVehicle}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:DisplayItem">
+                    <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="0.5*, 0.75*">
+                        <Label Grid.Row="0" FontSize="18" Grid.Column="0" Text="{Binding Key}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                        <Label Grid.Row="0" FontSize="18" Grid.Column="1" Text="{Binding Value}" VerticalOptions="Center" HorizontalOptions="End"/>
+                        <BoxView Grid.Row="1" Grid.ColumnSpan="2" Color="Black" HeightRequest="1"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
