@@ -57,6 +57,9 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<MauiAsset Include="vehicles - Copy.json" />
+		<MauiAsset Include="vehicles.json" />
+		<MauiAsset Include="repairs.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,6 +73,11 @@
 
 	<ItemGroup>
 	  <MauiXaml Remove="AddEditVehicle.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <TransformFile Include="repairs.json" />
+	  <MauiFont Include="vehicles.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -101,6 +109,10 @@
 	  <MauiXaml Update="AddEditVehiclePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Platforms\Android\Resources\raw\" />
 	</ItemGroup>
 
     <PropertyGroup>

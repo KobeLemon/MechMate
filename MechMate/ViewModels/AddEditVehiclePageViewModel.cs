@@ -2,49 +2,38 @@
 using CommunityToolkit.Mvvm.Input;
 using MechMate.Models;
 using MechMate.Services;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Maui.Controls; // for ImageSource
+using System.Text.RegularExpressions; // for ImageSource
 
 namespace MechMate.ViewModels;
 
 public partial class AddEditVehiclePageViewModel : ObservableObject
 {
     private readonly VinLookupService _vinLookupService;
+    private readonly string vehicleFile = "vehicles.json";
+    private readonly FileService _fileService;
 
     [ObservableProperty]
     private string vinInput = string.Empty;
-
     [ObservableProperty]
     private string lookupResult = string.Empty;
-
     [ObservableProperty]
     public Vehicle _vehicle = new();
-
     [ObservableProperty]
     public ImageSource vehicleImage;
 
-    [ObservableProperty]
-    public string title = "Add or Edit Vehicle";
+    private readonly INavigation _navigation;
 
     // Constructor for service injection
-    public AddEditVehiclePageViewModel(Vehicle vehicle, VinLookupService vinLookupService)
+    public AddEditVehiclePageViewModel(Vehicle vehicle, VinLookupService vinLookupService, FileService fileService)
     {
         _vehicle = vehicle;
         VehicleImage = vehicle.ImageUrl;
         _vinLookupService = vinLookupService;
+        _fileService = fileService;
     }
-
-    // Optional constructor when adding a new vehicle without an existing one
-    public AddEditVehiclePageViewModel(VinLookupService vinLookupService)
-    {
-        _vinLookupService = vinLookupService;
-        _vehicle = new Vehicle();
-    }
-
 
     [RelayCommand]
-    public async Task LookupVinAsync()
+    public async Task LookupVin()
     {
         if (string.IsNullOrWhiteSpace(VinInput))
         {
@@ -52,11 +41,20 @@ public partial class AddEditVehiclePageViewModel : ObservableObject
             return;
         }
 
+        string regexPattern = @"^[^IOQioq\W_]$";
+        Regex regex = new Regex(regexPattern, RegexOptions.IgnoreCase);
+        Match match = regex.Match(VinInput);
+        if (VinInput.Length != 17 || match.Success) 
+        {
+            LookupResult = "Invalid VIN. Must be 17 digits & not contain letters I, O, or Q";
+            return;
+        }
+
         var result = await _vinLookupService.LookupVinAsync(VinInput);
 
         if (result == null)
         {
-            LookupResult = "Lookup failed.";
+            LookupResult = "Lookup failed. Please try again.";
             return;
         }
 
@@ -84,5 +82,27 @@ public partial class AddEditVehiclePageViewModel : ObservableObject
         {
             VehicleImage = ImageSource.FromFile(file.FullPath);
         }
+    }
+
+    [RelayCommand]
+    private async Task SaveVehicle()
+    {
+        List<Vehicle> vehiceList = await _fileService.ReadJsonListAsync<Vehicle>(vehicleFile);
+
+        Vehicle = new()
+        {
+            Id = Vehicle.Id,
+            
+        };
+
+        var itemIndex = vehiceList.FindIndex(x => x.Id == Vehicle.Id);
+
+        if (itemIndex >= 0)
+            vehiceList[itemIndex] = Vehicle;
+        else
+            vehiceList.Add(Vehicle);
+
+        await _fileService.WriteJsonAsync(vehiceList, vehicleFile);
+        await _navigation.PushAsync(new MyRidePage(Vehicle));
     }
 }

@@ -15,7 +15,8 @@ namespace MechMate.Services
 
         public async Task<VinDecodeResult?> LookupVinAsync(string vin)
         {
-            var url = $"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/{vin}?format=json";
+            //var url = $"https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/{vin}?format=json";
+            var url = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/3N1CN7AP3EL877694?format=json";
             var response = await _httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
