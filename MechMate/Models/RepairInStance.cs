@@ -3,6 +3,14 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MechMate.Models
 {
+    public enum RepairStatus
+    {
+        Pending,
+        InProgress,
+        Completed,
+        Cancelled
+    }
+
     public class RepairInstance
     {
         [BsonId]
@@ -12,7 +20,8 @@ namespace MechMate.Models
         public string MechanicId { get; set; } = string.Empty;
         public DateTime RepairDate { get; set; }
         public DateTime? CompletionDate { get; set; }
-        public string RepairStatus { get; set; } = "Pending"; // Pending, In Progress, Completed, Cancelled
+        [BsonRepresentation(BsonType.String)] // Store enum as string in MongoDB
+        public RepairStatus RepairStatus { get; set; } = RepairStatus.Pending;
         public string RepairType { get; set; } = string.Empty;
         public Dictionary<string, string> RepairNotes { get; set; } = new Dictionary<string, string>();
         public int RepairMileage { get; set; }

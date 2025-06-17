@@ -19,6 +19,26 @@
         TextColor="#555"
         HorizontalOptions="Center"/>
             <BoxView Grid.Row="1" Grid.ColumnSpan="2" Color="Black" HeightRequest="1"/>
-        </VerticalStackLayout>
-    </ScrollView>
+        
+			<!-- Existing Labels and BoxView -->
+
+			<CollectionView ItemsSource="{Binding Repairs}"
+							SelectionMode="None">
+				<!-- Or "Single" if you want to select repairs -->
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<!-- Define how each repair item is displayed -->
+						<VerticalStackLayout Padding="10">
+							<Label Text="{Binding Description}" FontSize="16" FontAttributes="Bold"/>
+							<Label Text="{Binding Date, StringFormat='Date: {0:d}'}" FontSize="12" TextColor="#555"/>
+							<Label Text="{Binding Cost, StringFormat='Cost: {0:C}'}" FontSize="12" TextColor="#555"/>
+							<!-- Add more elements to display other repair details -->
+						</VerticalStackLayout>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+
+		</VerticalStackLayout>
+
+	</ScrollView>
 </ContentPage>

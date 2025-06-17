@@ -1,4 +1,4 @@
-﻿using Android.Service.QuickSettings;
+﻿//using Android.Service.QuickSettings;
 using MechMate.Models;
 using MechMate.Services;
 using MechMate.ViewModels;

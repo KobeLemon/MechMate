@@ -28,7 +28,7 @@ namespace MechMate
             }
 
             builder.Services
-                .AddSingleton(new MongoDbService(MONGODB_CONNECTION_STRING, "MechMateDB"))
+                .AddSingleton(new MongoDBService(MONGODB_CONNECTION_STRING, "MechMateDB"))
                 .AddSingleton<VinLookupService>()
                 .AddTransient<VinLookupViewModel>()
                 .AddTransient<MainPage>()
