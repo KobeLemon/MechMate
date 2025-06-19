@@ -2,14 +2,20 @@ using MechMate.Models;
 using MechMate.ViewModels;
 
 namespace MechMate
-
-    public MainPage(MongoDBService mongoDBService)
+{
+    public partial class MainPage : ContentPage
     {
-
-        public MainPage()
+        public MainPage(MainPageViewModel mainPageViewModel)
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+            BindingContext = mainPageViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext is MainPageViewModel vm)
+                vm.OnPageAppearing();
         }
 
         private async void OnVehicleSelectedAsync(object sender, SelectionChangedEventArgs e)
@@ -17,7 +23,12 @@ namespace MechMate
             var selectedVehicle = e.CurrentSelection.FirstOrDefault() as Vehicle;
             if (selectedVehicle == null)
                 return;
-            await Navigation.PushAsync(new MyRidePage(selectedVehicle));
+            await Navigation.PushAsync(new MyRidePage(selectedVehicle.Id));
+        }
+
+        private async void AddNewVehicle(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddEditVehiclePage(new Vehicle()));
         }
     }
 }
