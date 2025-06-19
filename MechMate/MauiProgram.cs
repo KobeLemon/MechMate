@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 using CommunityToolkit.Maui;
+=======
+﻿using CommunityToolkit.Maui;
+>>>>>>> f5e646080131bd7cc074e04a4ac5f023bc876a98
 using MechMate.Models;
 using MechMate.Services;
 using MechMate.ViewModels;

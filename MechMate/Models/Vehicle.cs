@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.IO;
 using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
 
 namespace MechMate.Models
 {
@@ -11,19 +12,20 @@ namespace MechMate.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
-        public string Make { get; set; } = string.Empty;
-        public string Model { get; set; } = string.Empty;
-        public int Year { get; set; }
-        public string Engine { get; set; } = string.Empty;
-        public string VIN { get; set; } = string.Empty;
-        public string PlateNumber { get; set; } = string.Empty;
-        public string Color { get; set; } = string.Empty;
-        public string BodyType { get; set; } = string.Empty;
-        public string FuelType { get; set; } = string.Empty;
-        public string Transmission { get; set; } = string.Empty;
+        public string Make { get; set; } = "none";
+        public string Model { get; set; } = "none";
+        public int Year { get; set; } = 1900;
+        public string Engine { get; set; } = "none";
+        public string VIN { get; set; } = "none";
+        public string PlateNumber { get; set; } = "none";
+        public string Color { get; set; } = "none";
+        public string BodyType { get; set; } = "none";
+        public string FuelType { get; set; } = "none";
+        public string Transmission { get; set; } = "none";
         public List<string> Features { get; set; } = new List<string>();
-        public string OwnerId { get; set; } = string.Empty;
-        public string ImageBase64 { get; set; } = string.Empty;
+        public string OwnerId { get; set; } = "none";
+        // Placeholder image
+        public string ImageBase64 { get; set; } = "none";
 
         [JsonIgnore]
         [BsonIgnore]
@@ -37,7 +39,7 @@ namespace MechMate.Models
             get
             {
                 if (string.IsNullOrEmpty(ImageBase64))
-                    return null;
+                    return ImageSource.FromStream(() => new MemoryStream());
                 try
                 {
                     byte[] imageBytes = Convert.FromBase64String(ImageBase64);
@@ -49,5 +51,21 @@ namespace MechMate.Models
                 }
             }
         }
+
+        [JsonIgnore]
+        [BsonIgnore]
+        public ObservableCollection<DisplayItem> DisplayVehicle => new()
+        {
+                new() {Key = "Year", Value = Year.ToString()},
+                new() {Key = "Make", Value = Make},
+                new() {Key = "Model", Value = Model},
+                new() {Key = "Engine", Value = Engine},
+                new() {Key = "VIN", Value = VIN},
+                new() {Key = "Plate Number", Value = PlateNumber},
+                new() {Key = "Color", Value = Color},
+                new() {Key = "Body Type", Value = BodyType},
+                new() {Key = "Fuel Type", Value = FuelType},
+                new() {Key = "Transmission", Value = Transmission}
+            };
     }
 }

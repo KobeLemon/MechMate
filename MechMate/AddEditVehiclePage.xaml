@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MechMate.AddEditVehiclePage"
+             xmlns:models="clr-namespace:MechMate.Models"
+             xmlns:pages="clr-namespace:MechMate"
+             xmlns:viewmodels="clr-namespace:MechMate.ViewModels"
+             x:DataType="viewmodels:AddEditVehiclePageViewModel"
+             Title="Add or Edit Vehicle">
+	<ScrollView>
+		<StackLayout>
+			<StackLayout Padding="10" Spacing="10">
+				<Entry Placeholder="Enter VIN" MaxLength="17" Text="{Binding VinInput}" />
+				<Button Text="Lookup VIN" Command="{Binding LookupVinCommand}" />
+				<Label Text="{Binding LookupResult}" LineBreakMode="WordWrap" />
+				<BoxView Color="Black" HeightRequest="1"/>
+			</StackLayout>
+			<StackLayout>
+				<Grid Padding="10"
+					  RowDefinitions="Auto, Auto"
+					  ColumnDefinitions="0.5*,0.75*">
+					<Label Grid.Row="0"
+						   Grid.Column="0"
+						   FontSize="18"
+						   Text="Image"
+						   HorizontalOptions="Start"
+						   VerticalOptions="End"
+						   Padding="0,10"/>
+					<Label Grid.Row="0"
+						   Grid.Column="0"
+						   Text="&#xE710;"
+						   FontFamily="MaterialAssets"
+						   HorizontalTextAlignment="End"
+						   VerticalOptions="End"
+						   Margin="10,15"/>
+					<FlexLayout BackgroundColor="WhiteSmoke" Direction="Column" AlignItems="Center" Grid.Row="0" Grid.Column="1">
+						<ImageButton
+						   Source="{Binding VehicleImage, Mode=TwoWay}"
+						   BackgroundColor="WhiteSmoke"
+						   HeightRequest="100"
+						   Command="{Binding SelectFileCommand}"/>
+						<Label Text="Edit/Upload" HorizontalOptions="Center"/>
+					</FlexLayout>
+					<BoxView Grid.Row="1"
+							 Grid.Column="0"
+							 Grid.ColumnSpan="2"
+							 Color="Black"
+							 HeightRequest="1"/>
+				</Grid>
+
+				<CollectionView ItemsSource="{Binding DisplayVehicle}">
+					<CollectionView.ItemTemplate>
+						<DataTemplate x:DataType="models:DisplayItem">
+							<Grid Padding="10"
+								  RowDefinitions="Auto, Auto"
+								  ColumnDefinitions="0.5*,0.75*">
+								<Label Grid.Row="0"
+									   Grid.Column="0"
+									   FontSize="18"
+									   Text="{Binding Key}"
+									   VerticalOptions="Center"
+									   HorizontalOptions="Start"/>
+								<Label Grid.Row="0"
+									   Grid.Column="0"
+									   Text="&#xE710;"
+									   FontFamily="MaterialAssets"
+									   HorizontalTextAlignment="End"
+									   VerticalOptions="Center"
+									   Margin="10"/>
+								<Entry Grid.Row="0"
+									   Grid.Column="1"
+									   FontSize="18"
+									   BackgroundColor="WhiteSmoke"
+									   Text="{Binding Value, Mode=TwoWay}"
+									   VerticalOptions="Center"
+									   HorizontalTextAlignment="End"/>
+								<BoxView Grid.Row="1"
+										 Grid.Column="0"
+										 Grid.ColumnSpan="2"
+										 Color="Black"
+										 HeightRequest="1"/>
+							</Grid>
+						</DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView>
+				<Label Text="{Binding FailedToSave}"/>
+				<Button Margin="10" Text="Save Vehicle" Command="{Binding SaveVehicleCommand}"/>
+			</StackLayout>
+		</StackLayout>
+	</ScrollView>
+</ContentPage>
