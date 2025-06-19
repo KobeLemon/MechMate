@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.IO;
 using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
 
 namespace MechMate.Models
 {
@@ -23,6 +24,7 @@ namespace MechMate.Models
         public string Transmission { get; set; } = "none";
         public List<string> Features { get; set; } = new List<string>();
         public string OwnerId { get; set; } = "none";
+        // Placeholder image
         public string ImageBase64 { get; set; } = "none";
 
         [JsonIgnore]
@@ -37,7 +39,7 @@ namespace MechMate.Models
             get
             {
                 if (string.IsNullOrEmpty(ImageBase64))
-                    return null;
+                    return ImageSource.FromStream(() => new MemoryStream());
                 try
                 {
                     byte[] imageBytes = Convert.FromBase64String(ImageBase64);
@@ -52,8 +54,8 @@ namespace MechMate.Models
 
         [JsonIgnore]
         [BsonIgnore]
-        public List<DisplayItem> DisplayVehicle => new List<DisplayItem>
-            {
+        public ObservableCollection<DisplayItem> DisplayVehicle => new()
+        {
                 new() {Key = "Year", Value = Year.ToString()},
                 new() {Key = "Make", Value = Make},
                 new() {Key = "Model", Value = Model},
@@ -64,6 +66,6 @@ namespace MechMate.Models
                 new() {Key = "Body Type", Value = BodyType},
                 new() {Key = "Fuel Type", Value = FuelType},
                 new() {Key = "Transmission", Value = Transmission}
-            }.Concat(Features.Select(feature => new DisplayItem { Key = "Feature", Value = feature })).ToList();
+            };
     }
 }

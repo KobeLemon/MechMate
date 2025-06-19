@@ -2,15 +2,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using MechMate.Interfaces;
 using MechMate.Models;
 using MechMate.Services;
+using System.Collections.ObjectModel;
 
 namespace MechMate.ViewModels;
 
 public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty]
-    private List<Vehicle> vehicleList = new();
-    [ObservableProperty]
-    private bool noVehicles = true;
+    private ObservableCollection<Vehicle> vehicleList = new();
 
     private readonly string vehicleFile = "vehicles.json";
     private readonly IMongoDBService _mongoDbService;
@@ -19,8 +18,6 @@ public partial class MainPageViewModel : ObservableObject
     {
         _mongoDbService = mongoDbService;
         _fileService = fileService;
-        ReadVehicleFile();
-        NoVehicles = VehicleList.Count == 0;
         //GetAllShortVehicleInfo();
         //VehicleList = new()
         //{
@@ -59,13 +56,18 @@ public partial class MainPageViewModel : ObservableObject
         //};
     }
 
-    private async void ReadVehicleFile()
+    public void OnPageAppearing()
+    {
+        LoadVehicleData();
+    }
+
+    private async void LoadVehicleData()
     {
         VehicleList = await _fileService.ReadJsonListAsync<Vehicle>(vehicleFile);
     }
 
-    private async void GetAllShortVehicleInfo()
-    {
-        VehicleList = await _mongoDbService.GetAllShortInfoForGarage();
-    }
+    //private async void GetAllShortVehicleInfo()
+    //{
+    //    VehicleList = await _mongoDbService.GetAllShortInfoForGarage();
+    //}
 }

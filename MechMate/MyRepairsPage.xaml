@@ -7,7 +7,7 @@
             x:DataType="viewmodel:MyRepairsPageViewModel"
             Title="My Repairs">
     <ScrollView>
-        <VerticalStackLayout>
+        <StackLayout Padding="10">
             <Label Text="{Binding VehicleName}"
         FontAttributes="Bold"
         FontSize="20"
@@ -19,6 +19,6 @@
         TextColor="#555"
         HorizontalOptions="Center"/>
             <BoxView Grid.Row="1" Grid.ColumnSpan="2" Color="Black" HeightRequest="1"/>
-        </VerticalStackLayout>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

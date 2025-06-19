@@ -57,7 +57,6 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-		<MauiAsset Include="vehicles - Copy.json" />
 		<MauiAsset Include="vehicles.json" />
 		<MauiAsset Include="repairs.json" />
 	</ItemGroup>

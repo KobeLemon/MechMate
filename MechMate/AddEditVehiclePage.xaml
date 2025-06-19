@@ -35,8 +35,7 @@
 						   Margin="10,15"/>
 					<FlexLayout BackgroundColor="WhiteSmoke" Direction="Column" AlignItems="Center" Grid.Row="0" Grid.Column="1">
 						<ImageButton
-						   Source="{Binding VehicleImage}"
-						   x:Name="ImageName"
+						   Source="{Binding VehicleImage, Mode=TwoWay}"
 						   BackgroundColor="WhiteSmoke"
 						   HeightRequest="100"
 						   Command="{Binding SelectFileCommand}"/>
@@ -49,7 +48,7 @@
 							 HeightRequest="1"/>
 				</Grid>
 
-				<CollectionView ItemsSource="{Binding Vehicle.DisplayVehicle}">
+				<CollectionView ItemsSource="{Binding DisplayVehicle}">
 					<CollectionView.ItemTemplate>
 						<DataTemplate x:DataType="models:DisplayItem">
 							<Grid Padding="10"
@@ -72,8 +71,7 @@
 									   Grid.Column="1"
 									   FontSize="18"
 									   BackgroundColor="WhiteSmoke"
-									   x:Name="{Binding Value, StringFormat='{0}Name'}"
-									   Text="{Binding Value}"
+									   Text="{Binding Value, Mode=TwoWay}"
 									   VerticalOptions="Center"
 									   HorizontalTextAlignment="End"/>
 								<BoxView Grid.Row="1"
@@ -85,6 +83,7 @@
 						</DataTemplate>
 					</CollectionView.ItemTemplate>
 				</CollectionView>
+				<Label Text="{Binding FailedToSave}"/>
 				<Button Margin="10" Text="Save Vehicle" Command="{Binding SaveVehicleCommand}"/>
 			</StackLayout>
 		</StackLayout>

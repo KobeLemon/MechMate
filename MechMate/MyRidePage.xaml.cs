@@ -1,27 +1,25 @@
 using MechMate.Models;
+using MechMate.Services;
 using MechMate.ViewModels;
 
 namespace MechMate;
 
 public partial class MyRidePage : ContentPage
 {
-    private readonly Vehicle _vehicle;
-    public MyRidePage(Vehicle vehicle)
+    private readonly string _vehicleId;
+    private readonly string _displayName;
+    private readonly string _VIN;
+    public MyRidePage(string vehicleId)
     {
-        _vehicle = vehicle;
+        _vehicleId = vehicleId;
         InitializeComponent();
-        // This is commented out because we need this once the mongo data is coming through with just the id. Full vehicle info is just for testing.
-        //BindingContext = new MyRidePageViewModel(vehicle.Id);
-        BindingContext = new MyRidePageViewModel(vehicle);
+        BindingContext = new MyRidePageViewModel(vehicleId, new FileService(), Navigation);
     }
 
-    private async void GoToMyRepairsPage(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-        await Navigation.PushAsync(new MyRepairsPage(_vehicle.Id, _vehicle.DisplayName, _vehicle.VIN));
-    }
-
-    private async void EditVehicle(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new AddEditVehiclePage(_vehicle));
+        base.OnAppearing();
+        if (BindingContext is MyRidePageViewModel vm)
+            vm.OnPageAppearing();
     }
 }

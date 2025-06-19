@@ -1,5 +1,4 @@
-﻿using Android.Service.QuickSettings;
-using MechMate.Models;
+﻿using MechMate.Models;
 using MechMate.Services;
 using MechMate.ViewModels;
 
@@ -10,7 +9,7 @@ namespace MechMate
         public AddEditVehiclePage(Vehicle vehicle)
         {
             InitializeComponent();
-            BindingContext = new AddEditVehiclePageViewModel(vehicle, new VinLookupService(), new FileService());
+            BindingContext = new AddEditVehiclePageViewModel(vehicle, new VinLookupService(), new FileService(), Navigation);
         }
 
     }

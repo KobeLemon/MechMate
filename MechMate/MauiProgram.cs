@@ -21,16 +21,16 @@ namespace MechMate
                 })
                 .UseMauiCommunityToolkit();
             // 
-            string MONGODB_CONNECTION_STRING = "mongodb://user1:mechmate@mechmate.sxdkq8x.mongodb.net/?retryWrites=true&w=majority&appName=MechMate";
+            string MONGODB_CONNECTION_STRING = "mongodb://user1:mechmate@mechmate.sxdkq8x.mongodb.net/?connectTimeoutMS=60000&retryWrites=true&w=majority&appName=MechMate";
             if (string.IsNullOrEmpty(MONGODB_CONNECTION_STRING))
             {
                 throw new InvalidOperationException("Connection string is not set. Please ensure the MONGODB_CONNECTION_STRING environment variable is defined.");
             }
 
             builder.Services
-                .AddSingleton(new MongoDbService(MONGODB_CONNECTION_STRING, "MechMateDB"))
+                .AddSingleton(new MongoDBService(MONGODB_CONNECTION_STRING, "MechMateDB"))
+                .AddSingleton(new FileService())
                 .AddSingleton<VinLookupService>()
-                .AddTransient<VinLookupViewModel>()
                 .AddTransient<MainPage>()
                 .AddTransient<MainPageViewModel>()
                 .AddTransient<MyRidePage>()
