@@ -7,7 +7,6 @@ namespace MechMate
     {
         public MainPage(MainPageViewModel mainPageViewModel)
         {
-            InitializeComponent();
             BindingContext = mainPageViewModel;
         }
 
